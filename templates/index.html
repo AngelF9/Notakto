@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .game-board {
+            width: 300px;
+            height: 300px;
+            border-collapse: collapse;
+        }
+        .game-board td { /* style the table cells */
+            width: 100px; /* set the width of the cells */
+            height: 100px; /* set the height of the cells */
+            border: 1px solid black;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 24px;
+        }
+    </style>
+    <title>Notakto</title>
+
+</head>
+<body>
+    <h1>Notakto</h1>
+    <p>Notakto is a tic-tac-toe variant where the player who makes the last move loses. The game is played on a 3x3 board. The game is played by two players, X and O, who take turns marking the spaces in a 3x3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game. The player who makes the last move loses the game.</p>
+
+    <form method='POST'>
+        <input type="number" name="location" min="1" max="9" required> # creates a number input field
+        <input type="submit" value="Place X"> # allows the user to submit the form
+    </form>
+    <table class="game-board">
+        {% for row in board %}      <!-- iterates through the rows of the board -->
+        <tr>                        <!-- starts a new row -->
+            {% for cell in row %}   <!-- iterates through the cells of the row -->
+            <td>{{ cell }}</td>     <!-- displays the cell value -->
+            {% endfor %}            <!-- ends the cell iteration -->
+        </tr>              <!-- ends the row -->
+        {% endfor %}       <!-- ends the row iteration -->
+    </table>               <!-- ends the table -->
+    {%  if message %}               <!-- checks if a message exists -->
+    <p>{{ message }}</p>            <!-- displays the message -->
+    {% endif %}                     <!-- ends the if statement -->
+    {% if winner %}                     <!-- checks if a winner exists -->
+    <p>Player: {{ winner }} wins!</p>   <!-- displays the winner -->
+    {% endif %}                         <!-- ends the if statement -->
+    <a href='/reset' class='reset-button'>Start Over</a>
+</body>
+</html>
